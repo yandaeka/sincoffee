@@ -1,0 +1,4 @@
+# Netlify membaca folder site sebagai website. Tidak ada langkah build.
+[build]
+  publish = "site"
+  command = ""

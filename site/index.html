@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1C1917">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="assets/app.css?v=5">
+<title>Sin Coffee · Pesan</title>
+</head>
+<body>
+<div class="app" id="app"><div class="err-screen"><span class="spin"></span><span class="hint">Memuat menu…</span></div></div>
+<script src="assets/config.js"></script>
+<script src="assets/sb.js?v=3"></script>
+<script>
+(function () {
+  var t = (new URLSearchParams(location.search).get('t') || '').replace(/[^a-f0-9]/g, '');
+  if (!t) {
+    document.getElementById('app').innerHTML =
+      '<header class="phero pp"><small>Sin Coffee</small><h1>Scan QR di meja untuk mulai pesan</h1></header>' +
+      '<div class="pp stack" style="padding-top:18px"><p>Setiap meja punya QR sendiri. Arahkan kamera HP ke QR di meja, lalu pesan dan bayar dari sini.</p>' +
+      (SB.siap ? '' : '<div class="banner b-err">Aplikasi belum diatur: isi url dan anonKey Supabase di assets/config.js.</div>') +
+      '<div class="pcard"><b>Untuk staf</b><a class="btn btn-g" href="barista.html">Layar barista</a><a class="btn btn-g" href="ringkasan.html">Ringkasan owner</a><a class="btn btn-g" href="qr.html">Cetak QR meja</a></div></div>';
+    return;
+  }
+  window.SC = { token: t };
+  var a = document.createElement('script'); a.src = 'assets/vendor/qrcode.js';
+  a.onload = function () { var b = document.createElement('script'); b.src = 'assets/pelanggan.js?v=7'; document.body.appendChild(b); };
+  document.body.appendChild(a);
+})();
+</script>
+</body>
+</html>

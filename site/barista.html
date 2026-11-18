@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1C1917">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="assets/app.css?v=5">
+<title>Barista · Sin Coffee</title>
+</head>
+<body>
+<header class="top" id="top"><div class="inner"><div class="brand"><span class="logo"><img src="assets/logo-sin.jpg" alt="Sin Coffee" width="36" height="36" style="width:36px;height:36px"></span><b>Sin Coffee</b></div></div></header>
+<main class="wrap"><div class="inner">
+  <div class="h2row"><div><h2>Layar barista</h2><div class="sub">Hanya pesanan yang sudah lunas. Urut dari yang paling lama.</div></div>
+    <button class="small-btn" id="sound" type="button">Aktifkan suara pesanan baru</button></div>
+  <div class="conn" id="conn" role="alert">Koneksi terputus. Menampilkan antrean terakhir, mencoba menyambung ulang…</div>
+  <div class="board">
+    <div class="b-head"><div><b id="aktif">Memuat…</b><div class="sub">Diperbarui setiap 3 detik</div></div><span class="chip c-ok" id="live">● Online</span></div>
+    <div class="cols" id="cols"></div>
+    <div class="done-line" id="done"></div>
+  </div>
+  <section class="panel" style="margin-top:16px">
+    <h3><span>Menu habis?</span><span style="text-transform:none;letter-spacing:0">Hilangkan centang agar pelanggan tidak bisa memesan</span></h3>
+    <div class="menu-list" id="menu"></div>
+  </section>
+</div></main>
+<script src="assets/config.js"></script>
+<script src="assets/sb.js?v=3"></script>
+<script src="assets/staf.js?v=5"></script>
+<script src="assets/barista.js?v=4"></script>
+</body>
+</html>

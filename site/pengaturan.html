@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1C1917">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="assets/app.css?v=5">
+<title>Pengaturan · Sin Coffee</title>
+</head>
+<body>
+<header class="top" id="top"><div class="inner"><div class="brand"><span class="logo"><img src="assets/logo-sin.jpg" alt="Sin Coffee" width="36" height="36" style="width:36px;height:36px"></span><b>Sin Coffee</b></div></div></header>
+<main class="wrap"><div class="inner">
+  <div class="h2row"><div><h2>Pengaturan</h2><div class="sub">Kelola menu, harga, dan akun staf gerai.</div></div></div>
+  <div class="conn" id="conn" role="alert"></div>
+  <div class="banner" id="msg" hidden style="margin-bottom:14px"></div>
+
+  <div class="dgrid">
+    <section class="panel s12">
+      <h3><span>Tambah menu baru</span></h3>
+      <form id="form-menu" class="pengaturan-form">
+        <label>Kategori<input type="text" name="kategori" list="daftar-kategori" required maxlength="50" placeholder="mis. Best Seller"></label>
+        <datalist id="daftar-kategori"></datalist>
+        <label>Nama menu<input type="text" name="nama" required maxlength="100"></label>
+        <label>Deskripsi (opsional)<input type="text" name="deskripsi" maxlength="200"></label>
+        <label>Pilihan suhu
+          <select name="suhu"><option value="">Tanpa pilihan (makanan)</option><option value="Es,Panas">Es / Panas</option><option value="Es">Es saja</option><option value="Panas">Panas saja</option></select>
+        </label>
+        <label class="cek"><input type="checkbox" name="manis" checked> Bisa pilih tingkat manis</label>
+        <label>Harga (Rp)<input type="number" name="harga" required min="0" step="500" inputmode="numeric"></label>
+        <button class="small-btn" type="submit">Tambah menu</button>
+      </form>
+    </section>
+
+    <section class="panel s12">
+      <h3><span>Daftar menu</span><span style="text-transform:none;letter-spacing:0" id="jml-menu"></span></h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Kategori</th><th>Nama</th><th class="r">Harga (Rp)</th><th>Status</th><th></th></tr></thead>
+        <tbody id="tbody-menu"><tr><td colspan="5" class="hint">Memuat…</td></tr></tbody>
+      </table></div>
+    </section>
+
+    <section class="panel s12">
+      <h3><span>Tambah pengguna</span></h3>
+      <form id="form-pengguna" class="pengaturan-form">
+        <label>Nama<input type="text" name="nama" required maxlength="100"></label>
+        <label>Peran
+          <select name="peran"><option value="barista">Barista</option><option value="owner">Owner</option></select>
+        </label>
+        <label>PIN (4 sampai 6 angka)<input type="password" name="pin" required inputmode="numeric" pattern="[0-9]{4,6}" maxlength="6" autocomplete="new-password"></label>
+        <button class="small-btn" type="submit">Tambah pengguna</button>
+      </form>
+    </section>
+
+    <section class="panel s12">
+      <h3><span>Akun staf</span></h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Nama</th><th>Peran</th><th>Status</th><th>Ganti PIN</th><th></th></tr></thead>
+        <tbody id="tbody-pengguna"><tr><td colspan="5" class="hint">Memuat…</td></tr></tbody>
+      </table></div>
+    </section>
+  </div>
+</div></main>
+<script src="assets/config.js"></script>
+<script src="assets/sb.js?v=3"></script>
+<script src="assets/staf.js?v=5"></script>
+<script src="assets/pengaturan.js?v=1"></script>
+</body>
+</html>

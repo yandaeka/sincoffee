@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1C1917">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="assets/app.css?v=5">
+<title>QR meja · Sin Coffee</title>
+<style>
+  /* Label QR 50 x 30 mm, logo di tengah, tanpa teks (dicetak) */
+  .lbl-grid{display:grid;grid-template-columns:repeat(4,50mm);justify-content:start;gap:0}
+  .lbl-item{display:flex;flex-direction:column;align-items:center}
+  .lbl{width:50mm;height:30mm;box-sizing:border-box;display:flex;align-items:center;justify-content:center;background:#FFFFFF;outline:0.3px dashed #BDB8B2;outline-offset:-0.3px}
+  .qbox{position:relative;width:24mm;height:24mm}
+  .qbox img.q{display:block;width:24mm;height:24mm;image-rendering:pixelated}
+  .qlogo{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:7mm;height:7mm;background:#FFFFFF;display:flex;align-items:center;justify-content:center}
+  .qlogo img{display:block;width:6.2mm;height:6.2mm}
+  .cap{font-size:12px;color:#5F5954;margin:6px 0 14px}
+  @page{size:A4;margin:12mm 5mm}
+  @media print{
+    .lbl-grid{grid-template-columns:repeat(4,50mm);justify-content:center;row-gap:0}
+    .lbl-item{display:block}
+    .lbl{width:50mm;height:30mm}
+  }
+</style>
+</head>
+<body>
+<header class="top" id="top"><div class="inner"><div class="brand"><span class="logo"><img src="assets/logo-sin.jpg" alt="Sin Coffee" width="36" height="36" style="width:36px;height:36px"></span><b>Sin Coffee</b></div></div></header>
+<main class="wrap"><div class="inner">
+  <div class="h2row no-print"><div><h2>QR meja</h2><div class="sub">Ukuran label 50 × 30 mm. Cetak lewat Ctrl+P dengan skala 100% (jangan "fit to page"), kertas A4, lalu potong per label.</div></div></div>
+  <div class="banner b-warn no-print" id="base" style="margin-bottom:14px"></div>
+  <div class="lbl-grid" id="grid"><p class="hint no-print">Memuat…</p></div>
+</div></main>
+<script src="assets/config.js"></script>
+<script src="assets/sb.js?v=3"></script>
+<script src="assets/staf.js?v=5"></script>
+<script src="assets/vendor/qrcode.js"></script>
+<script>
+(async function () {
+  var esc = STAF.esc;
+  var base = new URL('index.html', location.href).href;
+  document.getElementById('base').innerHTML = 'Alamat di QR: <span class="mono">' + esc(base) + '?t=…</span><br>QR ini memakai alamat website yang sedang dibuka. Cetak dari alamat Netlify yang akan dipakai pelanggan.';
+  try {
+    var d = await STAF.api('qr');
+    document.getElementById('grid').innerHTML = d.meja.map(function (m) {
+      var url = base + '?t=' + m.token, no = (m.kode_meja.match(/\d+/) || [''])[0];
+      // error correction H (30%) supaya tetap terbaca walau ada logo di tengah
+      var q = qrcode(0, 'H'); q.addData(url); q.make();
+      return '<div class="lbl-item">' +
+        '<div class="lbl"><div class="qbox"><img class="q" alt="" src="' + q.createDataURL(4, 0) + '">' +
+        '<div class="qlogo"><img alt="Sin Coffee" src="assets/logo-sin.jpg"></div></div></div>' +
+        '<div class="cap no-print">Meja ' + esc(no.padStart(2, '0')) + ' · <a href="' + esc(url) + '" target="_blank" rel="noopener">buka sebagai pelanggan</a></div>' +
+        '</div>';
+    }).join('');
+  } catch (e) { if (e.message !== 'login') document.getElementById('grid').innerHTML = '<div class="banner b-err">' + esc(e.message) + '</div>'; }
+})();
+</script>
+</body>
+</html>

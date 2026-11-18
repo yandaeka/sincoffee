@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1C1917">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="assets/app.css?v=5">
+<title>Ringkasan · Sin Coffee</title>
+</head>
+<body>
+<header class="top" id="top"><div class="inner"><div class="brand"><span class="logo"><img src="assets/logo-sin.jpg" alt="Sin Coffee" width="36" height="36" style="width:36px;height:36px"></span><b>Sin Coffee</b></div></div></header>
+<main class="wrap"><div class="inner">
+  <div class="h2row"><div><h2>Ringkasan gerai</h2><div class="sub">12 jam terakhir · diperbarui setiap 10 detik</div></div><span class="chip c-ok" id="live">● Live</span></div>
+  <div class="conn" id="conn" role="alert">Tidak bisa memuat data. Mencoba lagi…</div>
+  <div class="kpis" id="kpis"></div>
+  <div class="dgrid">
+    <section class="panel s5"><h3><span>Antrean sekarang</span><a href="barista.html" style="text-transform:none;letter-spacing:0">Buka layar barista</a></h3><div class="queue" id="queue"></div><p class="hint" id="oldest" style="margin:10px 0 0"></p></section>
+    <section class="panel s7 chart"><h3><span>Pesanan lunas per jam</span><span style="text-transform:none;letter-spacing:0">jam berjalan disorot</span></h3><div id="chart"></div></section>
+    <section class="panel s4"><h3><span>Menu terlaris</span><span style="text-transform:none;letter-spacing:0">porsi</span></h3><div class="hbars" id="top5"></div></section>
+    <section class="panel s4"><h3><span>Pembayaran dan rekonsiliasi</span></h3><div class="recon" id="recon"></div><p style="margin:12px 0 0" id="rstat"></p></section>
+    <section class="panel s4"><h3><span>Aktivitas sistem</span></h3><ol class="logl" id="log"></ol></section>
+    <section class="panel s12"><h3><span>Pesanan terbaru</span></h3><div class="tbl-wrap"><table><thead><tr><th>Nomor</th><th>Jam</th><th>Meja</th><th>Nama</th><th class="r">Item</th><th class="r">Total</th><th>Pembayaran</th><th>Produksi</th></tr></thead><tbody id="recent"></tbody></table></div></section>
+  </div>
+</div></main>
+<script src="assets/config.js"></script>
+<script src="assets/sb.js?v=3"></script>
+<script src="assets/staf.js?v=5"></script>
+<script src="assets/ringkasan.js?v=3"></script>
+</body>
+</html>
