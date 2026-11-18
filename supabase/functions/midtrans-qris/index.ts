@@ -17,7 +17,7 @@ const env = (k: string, wajib = true): string => {
   return v ?? '';
 };
 
-// Buat QRIS di Midtrans. Mengembalikan string QR (qr_string) dari respons Midtrans.
+// Buat QRIS di Midtrans. Mengembalikan URL gambar QR (action generate-qr-code) dari respons Midtrans.
 async function buatQris(ref: string, jumlah: number): Promise<string> {
   const auth = 'Basic ' + btoa(env('MIDTRANS_SERVER_KEY') + ':');
   const r = await fetch(env('MIDTRANS_BASE_URL') + '/v2/charge', {
@@ -30,10 +30,11 @@ async function buatQris(ref: string, jumlah: number): Promise<string> {
     }),
   });
   const d = await r.json().catch(() => ({}));
-  if (!r.ok || !d.qr_string) {
+  const gambar = (d.actions || []).find((a: { name?: string }) => a.name === 'generate-qr-code')?.url;
+  if (!r.ok || !gambar) {
     throw new Error('QRIS Midtrans gagal: ' + (d.status_message || d.error_message || r.status));
   }
-  return d.qr_string as string;
+  return gambar as string;
 }
 
 const SRK = env('SUPABASE_SERVICE_ROLE_KEY');

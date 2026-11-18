@@ -46,6 +46,8 @@
 
   // QR tagihan. Di produksi: string QRIS dari gateway. Di demo: penanda tagihan (tidak bisa dibayar).
   function qrImg(text) {
+    // Midtrans mengirim URL gambar QRIS. Tampilkan gambar itu langsung.
+    if (/^https?:\/\//.test(text)) return `<img src="${esc(text)}" alt="QRIS untuk pembayaran" width="240" height="240" style="width:240px;height:240px;display:block;margin:0 auto">`;
     try { const q = qrcode(0, 'M'); q.addData(text); q.make(); return q.createSvgTag({ cellSize: 6, margin: 0, scalable: true }); }
     catch (e) { return '<div class="hint">QR tidak tersedia</div>'; }
   }
@@ -116,6 +118,7 @@
 
   // Simpan QRIS sebagai gambar PNG supaya pelanggan bisa upload dari galeri di aplikasi pembayaran
   function simpanQr(teks, nomor) {
+    if (/^https?:\/\//.test(teks)) { window.open(teks, '_blank', 'noopener'); return; }
     try {
       const q = qrcode(0, 'M'); q.addData(teks); q.make();
       const img = new Image();
